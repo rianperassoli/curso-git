@@ -1,3 +1,9 @@
+for i in 1..15
+    puts "calculando"
+end
+puts i
+
+
 treze = 13
 cinco = 5
 
