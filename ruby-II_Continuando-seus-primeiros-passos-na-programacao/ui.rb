@@ -19,7 +19,22 @@ def avisa_letra_encontrada(total_encontrado)
 end
 
 def avisa_acertou_palavra
-	puts "Parabéns! Acertou!"
+	puts "Parabéns! você ganhou! \n"
+
+	puts "       .-..-""``""-..-.  "
+	puts "      |(`\\``----``/`)|  "
+	puts "       \\\\ ;:.    ; //  "
+	puts "        \\\\|%.    |//   "
+	puts "         )|%:    |(      "
+	puts "       ((,|%.    |,))    "
+	puts "        `-\\::.   /-´    "
+	puts "           `::..´        "
+	puts "              }{         "
+	puts "             {__}        "
+	puts "            /    \\      "
+	puts "           |`----´|      "
+	puts "           `.____.´      "
+	puts
 end
 
 def avisa_errou_palavra
