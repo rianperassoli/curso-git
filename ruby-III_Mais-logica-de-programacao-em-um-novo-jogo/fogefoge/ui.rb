@@ -3,8 +3,9 @@ def da_boas_vindas
     puts "Qual é o seu nome?"
     nome = gets.strip
     puts "\n\n"
-    puts "Começaremos o jogo para você, #{nome}"
+    puts "Começaremos o jogo para você, #{nome}" 
     nome
+
 end
 
 def desenha(mapa)
