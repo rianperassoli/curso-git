@@ -3,7 +3,7 @@ require_relative 'ui'
 ##############################################################3
 
 def le_mapa(numero)
-    arquivo = "mapa#{numero}.txt"
+    arquivo = "mapas/mapa#{numero}.txt"
     texto = File.read arquivo
     mapa = texto.split "\n"
 end
