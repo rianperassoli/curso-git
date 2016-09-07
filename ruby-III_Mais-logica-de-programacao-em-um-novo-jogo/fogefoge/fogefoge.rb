@@ -97,8 +97,24 @@ def jogador_perdeu?(mapa)
 	perdeu = !encontra_jogador(mapa)
 end
 
+def executa_remocao(mapa, posicao, quantidade)					#verificar
+	return if mapa[posicao.linha][posicao.coluna] == "X" && !posicao_valida?(mapa, posicao.to_array)
+
+	posicao.remove_do mapa
+	remove mapa, posicao, quantidade - 1
+end
+
+def remove(mapa, posicao, quantidade)
+	return if quantidade == 0 # ou return unless quantidade>0
+
+	executa_remocao mapa, posicao.direita, quantidade
+	executa_remocao mapa, posicao.cima, quantidade
+	executa_remocao mapa, posicao.esquerda, quantidade
+	#executa_remocao mapa, posicao.baixo, quantidade
+end
+
 def joga(nome)
-	mapa = le_mapa 2
+	mapa = le_mapa 3
 
 	while true
 		desenha mapa
@@ -113,10 +129,12 @@ def joga(nome)
 		end
 
 		heroi.remove_do mapa
+		if mapa[nova_posicao.linha][nova_posicao.coluna] == "*"
+			remove mapa, nova_posicao, 4
+		end
 		nova_posicao.coloca_no mapa
 
 		mapa = move_fantasmas mapa
-
 		if jogador_perdeu? mapa
 			game_over
 			break
