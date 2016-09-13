@@ -1,12 +1,15 @@
 class Livro
 	attr_reader :titulo, :preco, :ano_lancamento
 
-	def initialize(titulo, preco, ano_lancamento)
+	def initialize(titulo, preco, ano_lancamento, possui_reimpressao)
 		@titulo = titulo
-		@preco = preco
 		@ano_lancamento = ano_lancamento
-
 		@preco = calcula_preco(preco)		
+		@possui_reimpressao = possui_reimpressao
+	end
+
+	def possui_reimpressao?
+		@possui_reimpressao
 	end
 
 	private
@@ -27,10 +30,5 @@ def livro_para_newsletter(livro)
 	end
 end
 
-def aplica_promocao(livro)
-	
-end
-
-algoritmos = Livro.new("Algoritmos", 100, 1998)
-aplica_promocao(algoritmos)
+algoritmos = Livro.new("Algoritmos", 100, 1998, true)
 livro_para_newsletter(algoritmos)
