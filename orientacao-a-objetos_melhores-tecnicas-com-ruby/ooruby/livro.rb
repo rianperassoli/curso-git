@@ -5,18 +5,32 @@ class Livro
 		@titulo = titulo
 		@preco = preco
 		@ano_lancamento = ano_lancamento
+
+		@preco = calcula_preco(preco)		
+	end
+
+	private
+	def calcula_preco(base)
+		if @ano_lancamento < 2000
+			base *= 0.7
+		else
+			base
+		end
 	end
 end
 
-livro_rails = Livro.new(70, "Agile Web Development with Rails", 2011)
-
-livro_ruby = Livro.new(60, "Programming Ruby 1.9", 2010)
-
-def imprime_nota_fiscal(livros)
-	livros.each do |livro|
-		puts "Titulo: #{livro.titulo} - Preço: #{livro.preco}"
+def livro_para_newsletter(livro)
+	if livro.ano_lancamento < 1999
+		puts "Newsletter/Liquidacao"
+		puts livro.titulo
+		puts livro.preco
 	end
 end
 
-livros = [livro_rails, livro_ruby]
-imprime_nota_fiscal livros
+def aplica_promocao(livro)
+	
+end
+
+algoritmos = Livro.new("Algoritmos", 100, 1998)
+aplica_promocao(algoritmos)
+livro_para_newsletter(algoritmos)
