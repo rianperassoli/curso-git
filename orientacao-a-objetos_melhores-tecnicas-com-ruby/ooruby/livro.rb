@@ -32,14 +32,28 @@ class Livro
 	end
 end
 
+module Contador
+	def <<(livro)
+		push(livro)
+		if @maximo_necessario.nil? || @maximo_necessario < size
+			@maximo_necessario = size
+		end
+		self
+	end
+
+	attr_reader :maximo_necessario
+end
+
 class Estoque
+	attr_reader :livros
 	def initialize
 		@livros = []
+		@livros.extend Contador
 	end
 
 	def exporta_csv
 		@livros.each do |livro|
-			puts livro.to_csv
+			puts livro.to_csvmethod_name
 		end
 	end
 
@@ -53,13 +67,22 @@ class Estoque
 		@livros.size
 	end
 
-	def adiciona(livro)
+	def remove(livro)
+		@livros.delete livro
+	end
+
+	def maximo_necessario
+		@livros.maximo_necessario
+	end
+
+	def <<(livro)
 		@livros << livro if livro
+		self
 	end
 
 end
 
-def livro_para_newsletter(livro)
+def livmaximo_necessarioro_para_newsletter(livro)
 	if livro.ano_lancamento < 1999
 		puts "Newsletter/Liquidacao"
 		puts livro.titulo
@@ -70,18 +93,22 @@ end
 
 algoritmos = Livro.new("Algoritmos", 100, 1998, true)
 arquitetura = Livro.new("Introdução a Arquitetura e Design de Software", 70, 2011, true)
+programmer = Livro.new("The Pragmatic Programmer", 100, 1999, true)
+ruby = Livro.new("Programming Ruby", 100, 2004, true)
 
 estoque = Estoque.new
-estoque.adiciona algoritmos
-estoque.adiciona arquitetura
-estoque.adiciona Livro.new("The Pragmatic Programmer", 100, 1999, true)
-estoque.adiciona Livro.new("Programming Ruby", 100, 2004, true)
-estoque.adiciona nil
-
-estoque.exporta_csv
-puts "Total em estoque: #{estoque.total}"
-baratos = estoque.mais_baratos_que 80
-baratos.each do |livro|
-	puts livro.titulo
-end
-#livro_para_newsletter(algoritmos)
+estoque << algoritmos
+puts estoque.maximo_necessario
+estoque << arquitetura << programmer
+puts estoque.maximo_necessario
+estoque << ruby
+puts estoque.maximo_necessario
+estoque.remove algoritmos
+puts estoque.maximo_necessario
+# estoque.exporta_csv
+# puts "Total em estoque: #{estoque.total}"
+# baratos = estoque.mais_baratos_que 80
+# baratos.each do |livro|
+# 	puts livro.titulo
+# end
+ #livro_para_newsletter(algoritmos)
