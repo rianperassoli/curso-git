@@ -10,24 +10,35 @@ def livro_para_newsletter(livro)
 	end
 end
 
-algoritmos = Livro.new("Algoritmos", 100, 1998, true)
-arquitetura = Livro.new("Introdução a Arquitetura e Design de Software", 70, 2011, true)
-programmer = Livro.new("The Pragmatic Programmer", 100, 1999, true)
-ruby = Livro.new("Programming Ruby", 100, 2004, true)
+algoritmos = Livro.new("Algoritmos", 100, 1998, true, "editora", "livro")
+arquitetura = Livro.new("Introdução a Arquitetura e Design de Software", 70, 2011, true, "editora", "livro")
+programmer = Livro.new("The Pragmatic Programmer", 100, 1999, true, "editora", "livro")
+ruby = Livro.new("Programming Ruby", 100, 2004, true, "editora", "livro")
+
+revistona = Livro.new("Revista de Ruby", 10, 2012, true, "Revistas", "revista")
+
+online_arquitetura = Livro.new("Introdução a Arquitetura e Design de Software", 50, 2012, true, "editora", "ebook")
 
 estoque = Estoque.new
-estoque << algoritmos
-puts estoque.maximo_necessario
-estoque << arquitetura << programmer
-puts estoque.maximo_necessario
-estoque << ruby
-puts estoque.maximo_necessario
-estoque.remove algoritmos
-puts estoque.maximo_necessario
- estoque.exporta_csv
-puts "Total em estoque: #{estoque.total}"
-baratos = estoque.mais_baratos_que 80
-baratos.each do |livro|
-	puts livro.titulo
-end
-livro_para_newsletter(algoritmos)
+estoque << algoritmos << algoritmos << ruby << programmer << arquitetura << ruby << ruby << revistona << revistona << online_arquitetura
+estoque.vende ruby
+estoque.vende algoritmos
+estoque.vende algoritmos
+estoque.vende revistona
+estoque.vende online_arquitetura
+puts estoque.livro_que_mais_vendeu_por_titulo.titulo
+puts estoque.revista_que_mais_vendeu_por_titulo.titulo
+puts estoque.ebook_que_mais_vendeu_por_titulo.titulo
+
+puts estoque.respond_to?(:ebook_que_mais_vendeu_por_titulo)
+
+
+
+
+# estoque.exporta_csv
+# puts "Total em estoque: #{estoque.total}"
+# baratos = estoque.mais_baratos_que 80
+# baratos.each do |livro|
+# 	puts livro.titulo
+# end
+# livro_para_newsletter(algoritmos)
