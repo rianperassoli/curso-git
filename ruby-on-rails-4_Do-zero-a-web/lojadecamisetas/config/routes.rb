@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :departamentos
 	resources :produtos, only: [:new, :create, :destroy]
 	
 	# A linha acima substitui esses metodos/rotas abaixo
